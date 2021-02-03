@@ -24,7 +24,7 @@ fastify.register(require("./storage"), config.redis);
 
 fastify.register(async function(context) {
 
-	fastify.post("/", {
+	context.post("/", {
 		schema: {
 			body: model.phone.inboundSchema
 		}
@@ -33,7 +33,7 @@ fastify.register(async function(context) {
 		res.code(204).header("Location", './' + id);
 	});
 
-	fastify.get("/:id", {
+	context.get("/:id", {
 		schema: {
 			response: {
 				'2xx': model.phone.outboundSchema
@@ -47,7 +47,7 @@ fastify.register(async function(context) {
 		res.code(404).send(new ReferenceError("No such entity."));
 	});
 
-	fastify.put("/:id", {
+	context.put("/:id", {
 		schema: {
 			body: model.phone.inboundSchema,
 		}
@@ -69,13 +69,13 @@ fastify.register(async function(context) {
 		}
 	});
 
-	fastify.delete("/:id", async function(req, res) {
+	context.delete("/:id", async function(req, res) {
 		if (await context.storage.phone.remove(req.params.id))
 			res.code(204);
 		else res.code(404).send(new ReferenceError("No such entity."));
 	});
 
-	fastify.get("/", {
+	context.get("/", {
 		schema: {
 			response: {
 				'2xx': model.phone.outboundCollectionSchema
