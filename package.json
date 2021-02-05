@@ -6,10 +6,25 @@
 		"fastify": "^3.11",
 		"redis": "^3.0.2"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"mocha": "^8.2.1"
+	},
 	"main": "src/server.js",
 	"scripts": {
-		"start": "node ."
+		"start": "node .",
+		"test": "mocha"
+	},
+	"mocha": {
+		"spec": "./tst",
+		"recursive": true,
+		"reporter": "spec",
+		"require": [
+			"./tst/plugins/globalFixture.js",
+			"./tst/plugins/globalHooks.js"
+		],
+		"ignore": "./tst/plugins",
+		"diff": false,
+		"inlineDiffs": true
 	},
 	"engines": {
 		"node": ">=15.7"

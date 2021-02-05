@@ -3,6 +3,7 @@
 const redis = require('redis');
 
 require("../toolbox").lazilyLoadSubmodules(exports, __dirname);
+exports[Symbol.for('shutdown')] = shutDown;
 
 module.exports = setUp;
 
@@ -13,7 +14,7 @@ function connectionRetryDelay({ attempt, timesConnected, totalRetryTime }) {
 	return attempt === 1 ? 100 : totalRetryTime / (attempt - 1) * 2;
 }
 
-async function setUp(context, config) {
+function setUp(context, config) {
 	context.decorate('storage', exports);
 
 	return new Promise((resolve, reject) => {
@@ -46,3 +47,10 @@ async function setUp(context, config) {
 	});
 }
 setUp[Symbol.for('skip-override')] = true;
+
+function shutDown() {
+	return new Promise((resolve) => {
+		setUp.db.end(true);
+		setUp.db.stream.on('close', resolve);
+	});
+}

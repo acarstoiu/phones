@@ -1,0 +1,27 @@
+{
+	"esversion": 9,
+	"node": true,
+	"globals": {
+		"URL": false,
+		"Intl": false,
+		"describe": false,
+		"specify": false,
+		"before": false,
+		"after": false,
+		"beforeEach": false,
+		"afterEach": false
+	},
+	
+	"eqeqeq": true,
+	"futurehostile": true,
+	"leanswitch": true,
+	"noreturnawait": true,
+	"shadow": "inner",
+	"strict": "global",
+	"undef": true,
+	"unused": true,
+	"varstmt": true,
+
+	"eqnull": true,
+	"supernew": true
+}

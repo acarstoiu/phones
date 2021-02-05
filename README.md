@@ -18,7 +18,6 @@ apply:
     POST /phone
     {Phone to be created, without ID}
 
-
     GET /phone/{id}
 
     PUT /phone/{id}
@@ -62,10 +61,24 @@ After executing
 
     npm install --production
 
-in the current folder and at the very least configuring the database connection parameters within the 
+in the root folder and at the very least configuring the database connection parameters within the 
 `src/config.json` file, you can start the HTTP service by running
 
     node .
 
 Mind that you can also alter the host and port that the service listens on, as well other configuration
 parameters.
+
+---
+### Testing
+
+Tests can be executed by typing
+
+    npm test
+
+in the root folder. They are run with __another__ configuration, found in `tst/config.json`, 
+as if in another environment. Why? Because given the shallow nature of the project, 
+integration tests seemed the sensible thing to go for.
+
+:point_right: **Make sure you change the database used in tests** because its existing contents is 
+wiped out. 

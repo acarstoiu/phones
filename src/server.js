@@ -11,6 +11,7 @@ const { attachment } = require("./config.json");
 		app.log.fatal("The service cannot be started.");
 		throw e;
 	}
-	
+
 	app.log.info("The service is up and running.");
 })();
+
